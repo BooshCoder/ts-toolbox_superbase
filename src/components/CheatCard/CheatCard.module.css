@@ -1,0 +1,86 @@
+.card {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 12px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-family: "Fira Code", monospace;
+  color: #f8f8f2;
+}
+
+.title {
+  color: #d63578; /* рожевий */
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.description {
+  color: #fff; /* жовтий */
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+.code {
+  background-color: #282a36;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  color: #3395d2; /* бірюзовий */
+  margin-bottom: 8px;
+}
+
+.category {
+  color: #118a6b; /* червоний */
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.star,
+.starActive {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.star {
+  color: #888;
+}
+
+.starActive {
+  color: #c52935;
+}
+
+@media (min-width: 481px) {
+  .card {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .code {
+    font-size: 0.95rem;
+  }
+
+  .category {
+    font-size: 0.85rem;
+  }
+}

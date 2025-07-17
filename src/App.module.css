@@ -1,0 +1,26 @@
+.app {
+  padding: 12px;
+  font-family: "Fira Code", monospace;
+  background-color: #121212;
+  min-height: 100vh;
+}
+
+.heading {
+  color: #f8f8f2;
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+@media (min-width: 481px) {
+  .app {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  .heading {
+    font-size: 2rem;
+    text-align: center;
+  }
+}

@@ -1,0 +1,466 @@
+[
+  {
+    "question": "Що таке генератори?",
+    "answer": "Генератори — це функції, які можуть призупиняти виконання (yield) і відновлювати його пізніше. Використовуються для створення ітераторів, послідовностей, асинхронного коду.",
+    "codeExample": "function* gen() {\n  yield 1;\n  yield 2;\n}\nconst g = gen();\ng.next().value; // 1",
+    "category": "js",
+    "isFavorite": false,
+    "id": "63"
+  },
+  {
+    "question": "Що таке регулярні вирази (RegEx)?",
+    "answer": "Регулярні вирази — це шаблони для пошуку, перевірки або заміни тексту. Дозволяють ефективно працювати з рядками.",
+    "codeExample": "const regex = /\\d+/g;\nconsole.log('abc123'.match(regex)); // ['123']",
+    "category": "js",
+    "isFavorite": false,
+    "id": "64"
+  },
+  {
+    "question": "Що таке temporal dead zone?",
+    "answer": "TDZ — це проміжок між початком області видимості let/const і їх ініціалізацією. Доступ до змінної в TDZ викликає ReferenceError.",
+    "codeExample": "console.log(a); // ReferenceError\nlet a = 5;",
+    "category": "js",
+    "isFavorite": false,
+    "id": "65"
+  },
+  {
+    "question": "Яка різниця між function declaration та function expression?",
+    "answer": "Function declaration піднімається (hoisting) і доступна до оголошення. Function expression — ні. Expression може бути анонімною.",
+    "codeExample": "function foo() {}\nconst bar = function() {};",
+    "category": "js",
+    "isFavorite": false,
+    "id": "66"
+  },
+  {
+    "question": "Типи таймерів у JavaScript?",
+    "answer": "setTimeout — виконує код один раз із затримкою. setInterval — виконує код періодично. clearTimeout/clearInterval — скасовують таймер.",
+    "codeExample": "setTimeout(() => console.log('once'), 1000);\nconst id = setInterval(() => console.log('repeat'), 1000);\nclearInterval(id);",
+    "category": "js",
+    "isFavorite": false,
+    "id": "67"
+  },
+  {
+    "question": "Які методи рядків у JavaScript ти знаєш?",
+    "answer": "length, toUpperCase, toLowerCase, trim, includes, indexOf, lastIndexOf, startsWith, endsWith, slice, substring, replace, split, repeat, padStart, padEnd, charAt, charCodeAt, concat, match, matchAll, toString.",
+    "codeExample": "const str = 'Hello';\nconsole.log(str.toUpperCase()); // 'HELLO'",
+    "category": "js",
+    "isFavorite": false,
+    "id": "68"
+  },
+  {
+    "question": "Які методи масивів у JavaScript ти знаеш?",
+    "answer": "length, push, pop, unshift, shift, forEach, map, filter, reduce, find, findIndex, some, every, sort, reverse, concat, slice, splice, join, flat, flatMap, fill, Array.isArray.",
+    "codeExample": "const arr = [1,2,3];\narr.push(4);\narr.map(x => x*2);",
+    "category": "js",
+    "isFavorite": false,
+    "id": "69"
+  },
+  {
+    "question": "Що таке чиста функція?",
+    "answer": "Чиста функція повертає однаковий результат для однакових аргументів і не має побічних ефектів.",
+    "codeExample": "function add(a, b) { return a + b; }",
+    "category": "js",
+    "isFavorite": false,
+    "id": "70"
+  },
+  {
+    "question": "Як визначити наявність властивості в об'єкті?",
+    "answer": "Використати оператор in, метод hasOwnProperty, перевірку на undefined або ?. для вкладених властивостей.",
+    "codeExample": "\"name\" in obj;\nobj.hasOwnProperty('name');\nobj?.user?.name;",
+    "category": "js",
+    "isFavorite": false,
+    "id": "71"
+  },
+  {
+    "question": "Різниця між host-об'єктами та нативними об'єктами?",
+    "answer": "Host-об'єкти надаються середовищем (window, document), нативні — стандартом ECMAScript (Object, Array, Date). Host-об'єкти залежать від середовища.",
+    "codeExample": "console.log(window.innerWidth);\nconsole.log([1,2,3].length);",
+    "category": "js",
+    "isFavorite": false,
+    "id": "72"
+  },
+  {
+    "question": "Що таке об'єктна обгортка (Wrapper Objects)?",
+    "answer": "Об'єктна обгортка — це тимчасовий об'єкт, який створюється для примітивів (string, number, boolean), щоб надати їм методи та властивості.",
+    "codeExample": "const str = 'hello';\nconsole.log(str.toUpperCase()); // 'HELLO'",
+    "category": "js",
+    "isFavorite": false,
+    "id": "73"
+  },
+  {
+    "question": "Навіщо використовується оператор залишку (%)?",
+    "answer": "Оператор % повертає залишок від ділення. Використовується для перевірки парності, циклічності, обмеження значень.",
+    "codeExample": "console.log(10 % 3); // 1",
+    "category": "js",
+    "isFavorite": false,
+    "id": "74"
+  },
+  {
+    "question": "Як працює boxing/unboxing у JavaScript?",
+    "answer": "Boxing — автоматичне перетворення примітиву в об'єкт (наприклад, при виклику методу). Unboxing — отримання примітивного значення з об'єкта.",
+    "codeExample": "const str = new String('hi');\nconsole.log(typeof str); // 'object'\nconsole.log(str.valueOf()); // 'hi'",
+    "category": "js",
+    "isFavorite": false,
+    "id": "75"
+  },
+  {
+    "question": "Що таке мемоізація?",
+    "answer": "Мемоізація — це кешування результатів функції для уникнення повторних обчислень з тими ж аргументами.",
+    "codeExample": "function memoize(fn) {\n  const cache = {};\n  return function(x) {\n    if (cache[x]) return cache[x];\n    return cache[x] = fn(x);\n  };\n}",
+    "category": "js",
+    "isFavorite": false,
+    "id": "76"
+  },
+  {
+    "question": "Різниця між глибокою (deep) та поверхневою (shallow) копіями об'єкта?",
+    "answer": "Shallow copy копіює лише верхній рівень, вкладені об'єкти — за посиланням. Deep copy копіює всі рівні, створюючи незалежні копії.",
+    "codeExample": "const shallow = {...obj};\nconst deep = JSON.parse(JSON.stringify(obj));",
+    "category": "js",
+    "isFavorite": false,
+    "id": "77"
+  },
+  {
+    "question": "Що таке ланцюжок викликів функцій (chaining)?",
+    "answer": "Chaining — це виклик кількох методів об'єкта послідовно в одному виразі, кожен метод повертає this.",
+    "codeExample": "class Calc {\n  add(x) { this.v += x; return this; }\n  get() { return this.v; }\n}\nconst c = new Calc();\nc.add(2).add(3).get();",
+    "category": "js",
+    "isFavorite": false,
+    "id": "78"
+  },
+  {
+    "question": "Що таке неоголошена змінна?",
+    "answer": "Неоголошена змінна — це змінна, яка використовується без var/let/const. У нестрогому режимі стає глобальною, у strict mode — помилка.",
+    "codeExample": "function foo() { x = 5; }\nfoo();\nconsole.log(x); // 5",
+    "category": "js",
+    "isFavorite": false,
+    "id": "79"
+  },
+  {
+    "question": "Як передаються параметри у функцію: за посиланням чи значенням?",
+    "answer": "Примітиви передаються за значенням, об'єкти — за посиланням.",
+    "codeExample": "function f(a) { a = 2; }\nlet x = 1; f(x); // x === 1\nfunction g(obj) { obj.x = 2; }\nlet o = {x:1}; g(o); // o.x === 2",
+    "category": "js",
+    "isFavorite": false,
+    "id": "80"
+  },
+  {
+    "question": "Плюси та мінуси іммутабельності? Як досягти іммутабельності у JS?",
+    "answer": "Плюси: простота налагодження, безпека, оптимізація, функціональний стиль. Мінуси: витрати пам'яті, складність. Досягти — через Object.freeze, spread, map/filter, бібліотеки.",
+    "codeExample": "const frozen = Object.freeze({a:1});\nconst copy = {...obj, b:2};",
+    "category": "js",
+    "isFavorite": false,
+    "id": "81"
+  },
+  {
+    "question": "Типи спливаючих вікон JavaScript?",
+    "answer": "alert — просте повідомлення, confirm — підтвердження, prompt — введення тексту.",
+    "codeExample": "alert('Hi!');\nconfirm('Are you sure?');\nprompt('Enter name:');",
+    "category": "js",
+    "isFavorite": false,
+    "id": "82"
+  },
+  {
+    "question": "Типи об'єктів JavaScript?",
+    "answer": "Нативні (Object, Array, Date), глобальні (Math, JSON), host-об'єкти (window, document), користувацькі, спеціалізовані (Map, Set), прототипні.",
+    "codeExample": "const arr = [1,2,3];\nconst obj = {a:1};\nconst map = new Map();",
+    "category": "js",
+    "isFavorite": false,
+    "id": "83"
+  },
+  {
+    "question": "Парадигми програмування JavaScript?",
+    "answer": "JavaScript підтримує імперативне, декларативне, об'єктно-орієнтоване, функціональне, асинхронне, реактивне, подієво-орієнтоване програмування.",
+    "codeExample": "// Функціональна парадигма\nconst arr = [1,2,3].map(x => x*2);",
+    "category": "js",
+    "isFavorite": false,
+    "id": "84"
+  },
+  {
+    "question": "Типи помилок у JavaScript?",
+    "answer": "SyntaxError, ReferenceError, TypeError, RangeError, EvalError, URIError.",
+    "codeExample": "try { JSON.parse('bad'); } catch(e) { console.error(e.name); }",
+    "category": "js",
+    "isFavorite": false,
+    "id": "85"
+  },
+  {
+    "question": "Різниця між typeof і instanceof?",
+    "answer": "typeof повертає тип змінної як рядок, instanceof перевіряє, чи є об'єкт екземпляром класу/конструктора.",
+    "codeExample": "typeof [] // 'object'\n[] instanceof Array // true",
+    "category": "js",
+    "isFavorite": false,
+    "id": "86"
+  },
+  {
+    "question": "JavaScript статично, чи динамічно типізована мова?",
+    "answer": "JavaScript — динамічно типізована мова. Тип змінної визначається під час виконання.",
+    "codeExample": "let x = 5;\nx = 'text'; // OK",
+    "category": "js",
+    "isFavorite": false,
+    "id": "87"
+  },
+  {
+    "question": "Що таке регулярне вираження (Regular Expression)?",
+    "answer": "Регулярне вираження — це шаблон для пошуку, співставлення та маніпуляції тексту.",
+    "codeExample": "const regex = /\\d+/;\nconsole.log('abc123'.match(regex)); // ['123']",
+    "category": "js",
+    "isFavorite": false,
+    "id": "88"
+  },
+  {
+    "question": "Що таке рекурсія?",
+    "answer": "Рекурсія — це коли функція викликає саму себе. Має базовий випадок для зупинки.",
+    "codeExample": "function fact(n) { return n === 0 ? 1 : n * fact(n-1); }",
+    "category": "js",
+    "isFavorite": false,
+    "id": "89"
+  },
+  {
+    "question": "Що таке поліфіл (polyfill)?",
+    "answer": "Поліфіл — це код, який додає підтримку сучасних функцій у старих браузерах.",
+    "codeExample": "if (!Array.prototype.includes) {\n  Array.prototype.includes = function(val) {\n    return this.indexOf(val) !== -1;\n  };\n}",
+    "category": "js",
+    "isFavorite": false,
+    "id": "90"
+  },
+  {
+    "question": "Що таке switch/case? Правила використання switch/case?",
+    "answer": "switch/case — це умовна конструкція для вибору гілки коду за значенням виразу. Порівнює строго (===), використовуй break, default.",
+    "codeExample": "switch(day) {\n  case 1: console.log('Пн'); break;\n  default: console.log('Інше');\n}",
+    "category": "js",
+    "isFavorite": false,
+    "id": "91"
+  },
+  {
+    "question": "Типи функцій щодо можливості приймати інші функції?",
+    "answer": "Функції вищого порядку (приймають/повертають функції), колбеки, анонімні функції, замикання.",
+    "codeExample": "function hof(cb) { cb(); }\nhof(() => console.log('callback'));",
+    "category": "js",
+    "isFavorite": false,
+    "id": "92"
+  },
+  {
+    "question": "Що таке вирази (expression) та інструкції (statement) у JavaScript?",
+    "answer": "Вираз — обчислює і повертає значення. Інструкція — виконує дію, не обов'язково повертає значення.",
+    "codeExample": "let x = 5 + 3; // вираз у інструкції",
+    "category": "js",
+    "isFavorite": false,
+    "id": "93"
+  },
+  {
+    "question": "Різниця між .some() та .every()?",
+    "answer": ".some() повертає true, якщо хоча б один елемент відповідає умові. .every() — якщо всі елементи відповідають умові.",
+    "codeExample": "[1,2,3].some(x => x > 2); // true\n[1,2,3].every(x => x > 0); // true",
+    "category": "js",
+    "isFavorite": false,
+    "id": "94"
+  },
+  {
+    "question": "Як згенерувати випадкове число у JavaScript?",
+    "answer": "Math.random() повертає число від 0 до 1. Для діапазону — множити і округляти.",
+    "codeExample": "const n = Math.floor(Math.random() * 10);",
+    "category": "js",
+    "isFavorite": false,
+    "id": "95"
+  },
+  {
+    "question": "Типи операторів у JavaScript?",
+    "answer": "Арифметичні, присвоєння, порівняння, логічні, тернарний, бітові, typeof, instanceof, рядкові, spread/rest, виклику, nullish, опціональний ланцюжок.",
+    "codeExample": "let a = 1 + 2;\nlet b = a > 2 ? 'yes' : 'no';",
+    "category": "js",
+    "isFavorite": false,
+    "id": "96"
+  },
+  {
+    "question": "Яка різниця між параметром та аргументом функції?",
+    "answer": "Параметр — це змінна у визначенні функції. Аргумент — фактичне значення, яке передається при виклику.",
+    "codeExample": "function add(a, b) { return a + b; }\nadd(2, 3);",
+    "category": "js",
+    "isFavorite": false,
+    "id": "97"
+  },
+  {
+    "question": "Правила завдання імен для змінних та функцій JavaScript?",
+    "answer": "Ім'я починається з літери, _ або $. Не можна з цифри. Не використовуй зарезервовані слова. Регістр має значення. camelCase для змінних і функцій.",
+    "codeExample": "let userName = 'Іван';\nfunction getUser() {}",
+    "category": "js",
+    "isFavorite": false,
+    "id": "98"
+  },
+  {
+    "question": "Різниця між явним та неявним перетворенням (Implicit and Explicit Coercion)?",
+    "answer": "Явне — розробник явно вказує тип (String(123)), неявне — JS сам змінює тип (123 + 'abc' → '123abc').",
+    "codeExample": "String(123); // '123'\n123 + 'abc'; // '123abc'",
+    "category": "js",
+    "isFavorite": false,
+    "id": "99"
+  },
+  {
+    "question": "Навіщо застосовується метод Array.from()?",
+    "answer": "Array.from() створює масив із масивоподібних або ітерабельних об'єктів, з callback для трансформації.",
+    "codeExample": "Array.from('abc'); // ['a','b','c']",
+    "category": "js",
+    "isFavorite": false,
+    "id": "100"
+  },
+  {
+    "question": "Назвіть способи перетворення масиву на об'єкт?",
+    "answer": "Object.assign, ручне ітерування, reduce, Object.fromEntries, spread.",
+    "codeExample": "const arr = [1,2,3];\nconst obj = {...arr};",
+    "category": "js",
+    "isFavorite": false,
+    "id": "101"
+  },
+  {
+    "question": "Різниця між Object та Map?",
+    "answer": "Object — ключі тільки рядки/символи, Map — будь-який тип. Map зберігає порядок, має size, оптимізований для частих операцій.",
+    "codeExample": "const map = new Map();\nmap.set({}, 1);",
+    "category": "js",
+    "isFavorite": false,
+    "id": "102"
+  },
+  {
+    "question": "Що таке карірування (currying)?",
+    "answer": "Карірування — це перетворення функції з кількома аргументами на послідовність функцій, кожна з яких приймає один аргумент.",
+    "codeExample": "const add = a => b => a + b;\nadd(2)(3); // 5",
+    "category": "js",
+    "isFavorite": false,
+    "id": "103"
+  },
+  {
+    "question": "Навіщо використовують метод Object.seal()?",
+    "answer": "Object.seal() забороняє додавати або видаляти властивості об'єкта, але дозволяє змінювати значення існуючих.",
+    "codeExample": "const obj = {a:1};\nObject.seal(obj);\nobj.a = 2; // OK\nobj.b = 3; // Не додасться",
+    "category": "js",
+    "isFavorite": false,
+    "id": "104"
+  },
+  {
+    "question": "Навіщо використовується властивість .dataset?",
+    "answer": ".dataset дозволяє працювати з data-* атрибутами HTML-елементів через властивості об'єкта.",
+    "codeExample": "<div id=\"el\" data-id=\"123\"></div>\nconst el = document.getElementById('el');\nconsole.log(el.dataset.id); // '123'",
+    "category": "js",
+    "isFavorite": false,
+    "id": "105"
+  },
+  {
+    "question": "Як можна обмінюватися кодом між файлами?",
+    "answer": "Через модулі: import/export (ESM), require/module.exports (CommonJS), підключення скриптів у HTML, бандлери, імпорт JSON.",
+    "codeExample": "// math.js\nexport const add = (a,b) => a+b;\n// main.js\nimport {add} from './math.js';",
+    "category": "js",
+    "isFavorite": false,
+    "id": "106"
+  },
+  {
+    "question": "Як працює «складальник сміття» в JavaScript?",
+    "answer": "Garbage Collector автоматично звільняє пам'ять, видаляючи об'єкти, до яких немає посилань. Використовує алгоритм mark-and-sweep.",
+    "codeExample": "let obj = {a:1};\nobj = null; // об'єкт стане недосяжним і буде видалений",
+    "category": "js",
+    "isFavorite": false,
+    "id": "107"
+  },
+  {
+    "question": "Що таке витоки пам'яті?",
+    "answer": "Витоки пам'яті — це ситуація, коли пам'ять зайнята, але не використовується, бо на неї залишаються посилання. Причини: глобальні змінні, замикання, DOM, таймери.",
+    "codeExample": "let cache = new Map();\nfunction addToCache(key, value) { cache.set(key, value); }",
+    "category": "js",
+    "isFavorite": false,
+    "id": "108"
+  },
+  {
+    "question": "Як працює контекст виконання (execution context) у JavaScript?",
+    "answer": "Контекст виконання — це середовище, де виконується код: глобальний, функціональний, модульний. this залежить від способу виклику.",
+    "codeExample": "function foo() { console.log(this); }\nfoo(); // window або undefined",
+    "category": "js",
+    "isFavorite": false,
+    "id": "109"
+  },
+  {
+    "question": "Різниця між примітивом та об'єктом?",
+    "answer": "Примітиви: string, number, boolean, null, undefined, symbol, bigint — незмінні, передаються за значенням. Об'єкти — змінні, передаються за посиланням.",
+    "codeExample": "let a = 1, b = a; b = 2; // a === 1\nlet o1 = {x:1}, o2 = o1; o2.x = 2; // o1.x === 2",
+    "category": "js",
+    "isFavorite": false,
+    "id": "110"
+  },
+  {
+    "question": "Що означає текст max call stack size exceeded у консолі?",
+    "answer": "Це помилка переповнення стеку викликів, зазвичай через рекурсію без базового випадку або нескінченний цикл викликів.",
+    "codeExample": "function f() { f(); }\nf(); // Maximum call stack size exceeded",
+    "category": "js",
+    "isFavorite": false,
+    "id": "111"
+  },
+  {
+    "question": "Як реалізувати відкладене завантаження зображень?",
+    "answer": "Використати loading=\"lazy\" у <img>, Intersection Observer API, бібліотеки (Lazysizes, Lozad.js).",
+    "codeExample": "<img src=\"img.jpg\" loading=\"lazy\" />",
+    "category": "js",
+    "isFavorite": false,
+    "id": "112"
+  },
+  {
+    "question": "Чим відрізняються події input та change?",
+    "answer": "input спрацьовує при кожній зміні значення, change — після втрати фокусу або вибору значення.",
+    "codeExample": "input.addEventListener('input', fn);\ninput.addEventListener('change', fn);",
+    "category": "js",
+    "isFavorite": false,
+    "id": "113"
+  },
+  {
+    "question": "Чому typeof null повертає об'єкт?",
+    "answer": "Це історична помилка у JavaScript, пов'язана з бітовими тегами. typeof null === 'object'.",
+    "codeExample": "console.log(typeof null); // 'object'",
+    "category": "js",
+    "isFavorite": false,
+    "id": "114"
+  },
+  {
+    "question": "Навіщо потрібний конструктор Proxy?",
+    "answer": "Proxy дозволяє створювати об'єкти з кастомною поведінкою для операцій читання, запису, видалення, перевірки властивостей тощо.",
+    "codeExample": "const proxy = new Proxy({}, {\n  get: (t, p) => p in t ? t[p] : 'no prop'\n});",
+    "category": "js",
+    "isFavorite": false,
+    "id": "115"
+  },
+  {
+    "question": "Що таке хвостова рекурсія (tail recursion)? Оптимізація рекурсії?",
+    "answer": "Хвостова рекурсія — це коли рекурсивний виклик є останньою дією у функції. Tail Call Optimization дозволяє не переповнювати стек.",
+    "codeExample": "function fact(n, acc=1) { return n===0 ? acc : fact(n-1, acc*n); }",
+    "category": "js",
+    "isFavorite": false,
+    "id": "116"
+  },
+  {
+    "question": "Що таке і як працює debounce() та throttle() в JavaScript?",
+    "answer": "debounce — викликає функцію після затримки бездіяльності. throttle — викликає не частіше, ніж раз за інтервал.",
+    "codeExample": "function debounce(fn, d) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), d); }; }",
+    "category": "js",
+    "isFavorite": false,
+    "id": "117"
+  },
+  {
+    "question": "Як у JavaScript працюють декоратори? Як вони можуть бути використані для модифікації поведінки класів та методів?",
+    "answer": "Декоратори — це функції, які модифікують класи, методи або властивості. Використовуються для логування, авторизації, кешування, додавання метаданих.",
+    "codeExample": "// @log\nclass MyClass {}",
+    "category": "js",
+    "isFavorite": false,
+    "id": "118"
+  },
+  {
+    "question": "Як можна створити об'єкти з приватними властивостями та методами JavaScript?",
+    "answer": "Через WeakMap, приватні поля (#), замикання, Symbol.",
+    "codeExample": "class Example { #secret; constructor(v) { this.#secret = v; } getSecret() { return this.#secret; } }",
+    "category": "js",
+    "isFavorite": false,
+    "id": "119"
+  },
+  {
+    "question": "Методи перехоплення та обробки помилок у JavaScript?",
+    "answer": "try...catch, window.onerror, addEventListener('error'), addEventListener('unhandledrejection'), .catch для Promise, кастомні помилки, декоратори.",
+    "codeExample": "try { throw new Error('err'); } catch(e) { console.error(e); }",
+    "category": "js",
+    "isFavorite": false,
+    "id": "120"
+  }
+]
