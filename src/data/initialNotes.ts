@@ -14,7 +14,7 @@ export const initialNotes: CheatNote[] = [
     title: 'Enum у TypeScript',
     description: 'Як створити перелік значень (enum)',
     code: `enum Direction {\n  Up,\n  Down,\n  Left,\n  Right\n}`,
-    category: 'types',
+    category: 'other',
   },
   {
     id: '3',
