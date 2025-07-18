@@ -1,4 +1,4 @@
-import { useAddCheatNote } from '../../hooks/useCheatNotes';
+
 import { useState } from 'react';
 import type { Category } from '../../types/CheatNote';
 import styles from './AddForm.module.css';
@@ -13,20 +13,11 @@ export default function AddForm() {
   const [code, setCode] = useState('');
   const [category, setCategory] = useState<Category>('functions');
 
-  const mutation = useAddCheatNote();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newNote = {
-      question: title,
-      answer: description,
-      codeExample: code,
-      category,
-      isFavorite: false,
-    };
 
-    mutation.mutate(newNote);
 
     // Очистка полів
     setTitle('');

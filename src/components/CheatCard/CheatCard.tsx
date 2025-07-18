@@ -80,7 +80,10 @@ export default function CheatCard({ note, onToggleFavorite }: Props) {
           <span className={styles.category}>{note.category}</span>
           <button
             className={note.isFavorite ? styles.starActive : styles.star}
-            onClick={e => { e.stopPropagation(); onToggleFavorite(note.id); }}
+            onClick={(e) => {
+            e.stopPropagation();
+            onToggleFavorite(note.id!);
+          }}
             aria-label={note.isFavorite ? 'Видалити з обраного' : 'Додати в обране'}
           >
             {note.isFavorite ? '★' : '☆'}
@@ -113,7 +116,7 @@ export default function CheatCard({ note, onToggleFavorite }: Props) {
           <span className={styles.category}>{note.category}</span>
           <button
             className={note.isFavorite ? styles.starActive : styles.star}
-            onClick={e => { e.stopPropagation(); onToggleFavorite(note.id); }}
+            onClick={e => { e.stopPropagation(); onToggleFavorite(note.id!); }}
             aria-label={note.isFavorite ? 'Видалити з обраного' : 'Додати в обране'}
           >
             {note.isFavorite ? '★' : '☆'}
