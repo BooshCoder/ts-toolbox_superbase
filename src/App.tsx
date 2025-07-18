@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useInfiniteCheatNotes } from './hooks/useCheatNotes';
 import { useLocalStorage } from './hooks/useLocalStorage';
-import type { Category } from './types/CheatNote';
+import type { Category, CheatNote } from './types/CheatNote';
 import CheatCard from './components/CheatCard/CheatCard';
 import FilterBar from './components/FilterBar/FilterBar';
 import SearchBar from './components/SearchBar/SearchBar';
@@ -23,7 +23,7 @@ function App() {
   const [mode, setMode] = useState<'all' | 'random'>('all');
 
   // Збираємо всі картки з усіх сторінок
-  const cheatnotes = data ? data.pages.flat() : [];
+  const cheatnotes: CheatNote[] = data ? data.pages.flat() : [];
 
   // IntersectionObserver для автодогрузки
   useEffect(() => {
@@ -45,9 +45,9 @@ function App() {
 
   const filteredNotes = cheatnotes
     .filter(note => {
-      const isFav = favorites.includes(note.id ?? '');
+      const isFav = favorites.includes(note.id || '');
       if (selectedCategory === 'favorite') return isFav;
-      const categoryMatch = selectedCategory === 'all' || note.category === (selectedCategory ?? '');
+      const categoryMatch = selectedCategory === 'all' || note.category === (selectedCategory || '');
       const text = [
         note.question || note.title || '',
         note.answer || note.description || '',
@@ -99,7 +99,6 @@ function App() {
       </div>
       <FilterBar selected={selectedCategory} onSelect={setSelectedCategory} />
       <SearchBar value={search} onChange={setSearch} />
-      {/* <AddForm /> */}
       {isLoading && <p>Loading...</p>}
       {error && <p>Error fetching notes</p>}
       <div className="cheatCardGrid">
