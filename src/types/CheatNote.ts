@@ -7,7 +7,7 @@ export type Category =
   | 'other';
 
 export interface CheatNote {
-  id: string;
+  id?: string;
   title?: string;
   description?: string;
   code?: string;

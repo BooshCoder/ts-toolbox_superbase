@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
+import { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import styles from './CheatCard.module.css';
 import type { CheatNote } from '../../types/CheatNote';
 import ReactMarkdown from 'react-markdown';
