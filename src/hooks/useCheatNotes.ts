@@ -1,32 +1,30 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import type { CheatNote } from '../types/CheatNote';
+import { mapSupabaseToCheatNote } from '../utils/mapSupabaseToCheatNote';
 
-const BASE_URL = 'https://6878a32163f24f1fdc9ec8d5.mockapi.io/ts';
+const BASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const ENDPOINT = '/rest/v1/cheatnotes';
+const HEADERS = {
+  apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+  Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+  'Content-Type': 'application/json',
+};
 
-export const useCheatNotes = () => {
-  return useQuery<CheatNote[]>({
+const PAGE_SIZE = 20;
+
+export const useInfiniteCheatNotes = () => {
+  return useInfiniteQuery<CheatNote[], Error>({
     queryKey: ['cheatnotes'],
-    queryFn: async () => {
-      const [res1, res2] = await Promise.all([
-        axios.get(`${BASE_URL}/cheats_1`),
-        axios.get(`${BASE_URL}/cheats_2`),
-      ]);
-      return [...res1.data, ...res2.data].map((item: {
-        id: string;
-        question: string;
-        answer: string;
-        codeExample: string;
-        category: string;
-        isFavorite: boolean;
-      }) => ({
-        id: item.id,
-        title: item.question,
-        description: item.answer,
-        code: item.codeExample,
-        category: item.category as import('../types/CheatNote').Category,
-      }));
+    queryFn: async ({ pageParam = 0 }) => {
+      const res = await axios.get(`${BASE_URL}${ENDPOINT}?limit=${PAGE_SIZE}&offset=${pageParam}`, { headers: HEADERS });
+      return (res.data as unknown[]).map(mapSupabaseToCheatNote);
     },
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage.length < PAGE_SIZE) return undefined;
+      return allPages.length * PAGE_SIZE;
+    },
+    initialPageParam: 0,
   });
 };
 
@@ -34,22 +32,13 @@ export const useAddCheatNote = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (newNote: {
-      question: string;
-      answer: string;
-      codeExample: string;
-      category: string;
-      isFavorite: boolean;
-    }) => {
-      const [res1, res2] = await Promise.all([
-        axios.get(`${BASE_URL}/cheats_1`),
-        axios.get(`${BASE_URL}/cheats_2`),
-      ]);
-
-      const targetEndpoint =
-        res1.data.length <= res2.data.length ? 'cheats_1' : 'cheats_2';
-
-      const response = await axios.post(`${BASE_URL}/${targetEndpoint}`, newNote);
+    mutationFn: async (newNote: CheatNote) => {
+      const response = await axios.post(`${BASE_URL}${ENDPOINT}`, newNote, {
+        headers: {
+          ...HEADERS,
+          Prefer: 'return=representation',
+        },
+      });
       return response.data;
     },
     onSuccess: () => {

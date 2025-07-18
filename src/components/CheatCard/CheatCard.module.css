@@ -1,39 +1,92 @@
-.card {
-  background-color: #1e1e1e;
-  border-radius: 12px;
-  padding: 12px;
-  margin: 12px 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  font-family: "Fira Code", monospace;
-  color: #f8f8f2;
+.flipContainer {
+  width: 100%;
+  min-width: 220px;
+  min-height: 220px;
+  margin: 0;
+  display: flex;
+  position: relative;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.frontSlideIn,
+.frontSlideOut,
+.backSlideIn,
+.backSlideOut {
+  position: absolute;
+  width: 100%;
+  min-height: 220px;
+  left: 0;
+  top: 0;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 20px 18px 16px 18px;
+  box-shadow: none;
+  background: #1e1e1e;
+  z-index: 2;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.frontSlideIn {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  z-index: 3;
+  border: 1.5px solid #fff;
+}
+
+.frontSlideOut {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.backSlideIn {
+  background: #23272e;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  z-index: 3;
+}
+
+.backSlideOut {
+  background: #23272e;
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  z-index: 2;
+  pointer-events: none;
 }
 
 .title {
-  color: #d63578; /* рожевий */
+  color: #d63578;
   margin-bottom: 8px;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .description {
-  color: #fff; /* жовтий */
+  color: #fff;
   margin-bottom: 12px;
-  font-size: 0.9rem;
+  font-size: 0.97rem;
 }
 
 .code {
   background-color: #282a36;
   padding: 12px;
   border-radius: 8px;
-  overflow-x: auto;
-  font-size: 0.85rem;
-  color: #3395d2; /* бірюзовий */
+  font-size: 0.9rem;
+  color: #3395d2;
   margin-bottom: 8px;
+  overflow-x: auto;
 }
 
 .category {
-  color: #118a6b; /* червоний */
+  color: #118a6b;
   font-weight: bold;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
 }
 
@@ -63,24 +116,59 @@
   color: #c52935;
 }
 
-@media (min-width: 481px) {
-  .card {
-    padding: 16px;
-  }
+/* Grid for cards (in App.module.css or parent) */
 
-  .title {
-    font-size: 1.2rem;
+@media (max-width: 600px) {
+  .flipContainer {
+    min-width: 0;
+    width: 100%;
   }
+  .frontSlideIn,
+  .frontSlideOut,
+  .backSlideIn,
+  .backSlideOut {
+    border-radius: 12px;
+    padding: 14px 8px 12px 8px;
+  }
+}
 
-  .description {
-    font-size: 1rem;
-  }
+/* Додаткові стилі для Markdown-коду */
+.description pre,
+.description code {
+  font-family: "Fira Mono", "Fira Code", monospace;
+}
+.description pre {
+  background: #23272e;
+  color: #3395d2;
+  font-size: 0.9em;
+  border-radius: 7px;
+  padding: 10px 14px;
+  margin: 12px 0;
+  overflow-x: auto;
+  white-space: pre;
+  line-height: 1.5;
+  max-width: 100%;
+}
+.description code {
+  color: #3395d2;
+  font-size: 0.9em;
+  background: none;
+}
 
-  .code {
-    font-size: 0.95rem;
-  }
+.lines {
+  position: relative;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+.lineWhite {
+  height: 3px;
+  background: #fff;
+  width: 100%;
+  border-radius: 2px;
+}
 
-  .category {
-    font-size: 0.85rem;
-  }
+.codeIcon {
+  fill: #3395d2;
+  display: block;
+  pointer-events: none;
 }

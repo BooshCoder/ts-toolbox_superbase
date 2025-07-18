@@ -12,6 +12,21 @@
   text-align: left;
 }
 
+.cheatCardGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  margin-top: 18px;
+}
+
+.cheatCardGrid > * {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media (min-width: 481px) {
   .app {
     max-width: 720px;
@@ -23,4 +38,31 @@
     font-size: 2rem;
     text-align: center;
   }
+}
+
+.modeButtons {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 28px;
+  justify-content: center;
+}
+.modeBtn {
+  background: #1e1e1e;
+  border: 1.5px solid #fff;
+  border-radius: 16px;
+  color: #d63578;
+  font-family: "Fira Code", monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 14px 32px;
+  cursor: pointer;
+  box-shadow: none;
+  transition: border 0.2s, background 0.2s, color 0.2s;
+  outline: none;
+}
+.modeBtn.active,
+.modeBtn:active {
+  background: #23272e;
+  border: 2.5px solid #d63578;
+  color: #fff;
 }
