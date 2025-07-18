@@ -45,9 +45,9 @@ function App() {
 
   const filteredNotes = cheatnotes
     .filter(note => {
-      const isFav = favorites.includes(note.id);
+      const isFav = favorites.includes(note.id ?? '');
       if (selectedCategory === 'favorite') return isFav;
-      const categoryMatch = selectedCategory === 'all' || note.category === selectedCategory;
+      const categoryMatch = selectedCategory === 'all' || note.category === (selectedCategory ?? '');
       const text = [
         note.question || note.title || '',
         note.answer || note.description || '',

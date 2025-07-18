@@ -100,12 +100,12 @@ export default function CheatCard({ note, onToggleFavorite }: Props) {
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeHighlight]}
             >
-              {preprocessMarkdown(note.description || note.answer || '')}
+              {preprocessMarkdown((note.description ?? note.answer) ?? '')}
             </ReactMarkdown>
           </div>
           {(note.code || note.codeExample) && (
             <pre className={styles.code}>
-              <code>{preprocessMarkdown(note.code || note.codeExample || '')}</code>
+              <code>{preprocessMarkdown((note.code ?? note.codeExample) ?? '')}</code>
             </pre>
           )}
         </div>
