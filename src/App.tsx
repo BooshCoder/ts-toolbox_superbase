@@ -23,24 +23,26 @@ function App() {
   const [mode, setMode] = useState<'all' | 'random'>('all');
 
   // Збираємо всі картки з усіх сторінок
-  const cheatnotes: CheatNote[] = data ? data.pages.flat() : [];
+  const cheatnotes = (data?.pages ?? []).flat() as CheatNote[];
 
   // IntersectionObserver для автодогрузки
   useEffect(() => {
     if (!hasNextPage || isLoading) return;
+    const node = loaderRef.current;
+    if (!node) return;
     const observer = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
         fetchNextPage();
       }
     }, { threshold: 1 });
-    if (loaderRef.current) observer.observe(loaderRef.current);
+    observer.observe(node);
     return () => {
-      if (loaderRef.current) observer.unobserve(loaderRef.current);
+      observer.unobserve(node);
     };
   }, [fetchNextPage, hasNextPage, isLoading]);
 
   const handleToggleFavorite = (id: string) => {
-    setFavorites(favs => favs.includes(id) ? favs.filter(f => f !== id) : [...favs, id]);
+    setFavorites((favs) => (favs.includes(id) ? favs.filter((f) => f !== id) : [...favs, id]));
   };
 
   const filteredNotes = cheatnotes
@@ -56,12 +58,12 @@ function App() {
       const searchMatch = search.trim() === '' || text.includes(search.trim().toLowerCase());
       return categoryMatch && searchMatch;
     })
-    .map(note => ({ ...note, isFavorite: favorites.includes(note.id) }));
+   .map(note => ({ ...note, isFavorite: favorites.includes(note.id || '') })); 
 
   // Перевірка дублікатів id
   const ids = cheatnotes.map(n => n.id);
   const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
-  if (duplicates.length > 0) {
+  if (duplicates.length) {
     console.warn('🔴 Duplicate IDs found:', duplicates);
   }
 
