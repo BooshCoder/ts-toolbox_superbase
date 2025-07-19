@@ -1,8 +1,10 @@
 .app {
   padding: 12px;
   font-family: "Fira Code", monospace;
-  background-color: #121212;
+  background-color: #282c34;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .heading {
@@ -62,7 +64,7 @@
 }
 .modeBtn.active,
 .modeBtn:active {
-  background: #23272e;
-  border: 2.5px solid #d63578;
+  background: #ff79c6;
+  border: 2.5px solid #fff;
   color: #fff;
 }

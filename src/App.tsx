@@ -24,6 +24,7 @@ function App() {
 
   // Збираємо всі картки з усіх сторінок
   const cheatnotes = (data?.pages ?? []).flat() as CheatNote[];
+  cheatnotes.sort((a, b) => Number(a.id) - Number(b.id));
 
   // IntersectionObserver для автодогрузки
   useEffect(() => {

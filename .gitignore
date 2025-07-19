@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 
 .env
+
+output.json
+README-js.md
+
+src/components/EditCheatNoteModal.tsx
