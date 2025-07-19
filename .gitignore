@@ -27,5 +27,3 @@ dist-ssr
 
 output.json
 README-js.md
-
-src/components/EditCheatNoteModal.tsx
