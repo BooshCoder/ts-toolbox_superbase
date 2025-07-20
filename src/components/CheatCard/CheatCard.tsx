@@ -8,7 +8,7 @@ import EditCheatNoteModal from '../EditCheatNoteModal';
 
 type Props = {
   note: CheatNote;
-  onToggleFavorite: (id: string) => void;
+  onToggleFavorite: (id: number) => void;
 };
 
 export default function CheatCard({ note, onToggleFavorite }: Props) {
@@ -18,7 +18,6 @@ export default function CheatCard({ note, onToggleFavorite }: Props) {
   const frontRef = useRef<HTMLDivElement>(null);
   const backRef = useRef<HTMLDivElement>(null);
   const [editOpen, setEditOpen] = useState(false);
-  const [localNote, setLocalNote] = useState<CheatNote>(note);
 
   // Динамічна висота для плавної анімації
   useLayoutEffect(() => {
@@ -71,7 +70,7 @@ export default function CheatCard({ note, onToggleFavorite }: Props) {
         }
         ref={frontRef}
       >
-        <h2 className={styles.title}>{localNote.title || localNote.question}</h2>
+        <h2 className={styles.title}>{note.question}</h2>
         <div className={styles.lines}>
           <div className={styles.lineWhite}></div>
           <button
@@ -87,16 +86,16 @@ export default function CheatCard({ note, onToggleFavorite }: Props) {
         </div>
         <div style={{ flex: 1 }} />
         <div className={styles.metaRow}>
-          <span className={styles.category}>{localNote.category}</span>
+          <span className={styles.category}>{note.category}</span>
           <button
-            className={localNote.isFavorite ? styles.starActive : styles.star}
+            className={note.isFavorite ? styles.starActive : styles.star}
             onClick={(e) => {
-            e.stopPropagation();
-            onToggleFavorite(localNote.id!);
-          }}
-            aria-label={localNote.isFavorite ? 'Видалити з обраного' : 'Додати в обране'}
+              e.stopPropagation();
+              onToggleFavorite(note.id!);
+            }}
+            aria-label={note.isFavorite ? 'Видалити з обраного' : 'Додати в обране'}
           >
-            {localNote.isFavorite ? '★' : '☆'}
+            {note.isFavorite ? '★' : '☆'}
           </button>
         </div>
       </div>
@@ -113,31 +112,31 @@ export default function CheatCard({ note, onToggleFavorite }: Props) {
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeHighlight]}
             >
-              {preprocessMarkdown((localNote.description ?? localNote.answer) ?? '')}
+              {preprocessMarkdown(note.answer ?? '')}
             </ReactMarkdown>
           </div>
-          {(localNote.code || localNote.codeExample) && (
+          {(note.codeExample) && (
             <pre className={styles.code}>
-              <code>{preprocessMarkdown((localNote.code ?? localNote.codeExample) ?? '')}</code>
+              <code>{preprocessMarkdown(note.codeExample ?? '')}</code>
             </pre>
           )}
         </div>
         <div className={styles.metaRow}>
-          <span className={styles.category}>{localNote.category}</span>
+          <span className={styles.category}>{note.category}</span>
           <button
-            className={localNote.isFavorite ? styles.starActive : styles.star}
-            onClick={e => { e.stopPropagation(); onToggleFavorite(localNote.id!); }}
-            aria-label={localNote.isFavorite ? 'Видалити з обраного' : 'Додати в обране'}
+            className={note.isFavorite ? styles.starActive : styles.star}
+            onClick={e => { e.stopPropagation(); onToggleFavorite(note.id!); }}
+            aria-label={note.isFavorite ? 'Видалити з обраного' : 'Додати в обране'}
           >
-            {localNote.isFavorite ? '★' : '☆'}
+            {note.isFavorite ? '★' : '☆'}
           </button>
         </div>
       </div>
       <EditCheatNoteModal
         open={editOpen}
         onClose={() => setEditOpen(false)}
-        note={localNote}
-        onSave={(updated: CheatNote) => setLocalNote(updated)}
+        note={note}
+        onSave={() => {}}
       />
     </div>
   );

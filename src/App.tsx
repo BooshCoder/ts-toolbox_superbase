@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { useInfiniteCheatNotes } from './hooks/useCheatNotes';
+import { useCheatNotes } from './hooks/useCheatNotes';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import type { Category, CheatNote } from './types/CheatNote';
 import CheatCard from './components/CheatCard/CheatCard';
@@ -8,58 +8,34 @@ import SearchBar from './components/SearchBar/SearchBar';
 import styles from './App.module.css';
 
 function App() {
-  const {
-    data,
-    isLoading,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useInfiniteCheatNotes();
+  const { data, isLoading, error } = useCheatNotes();
   const [selectedCategory, setSelectedCategory] = useState<Category | 'all' | 'favorite'>('all');
   const [search, setSearch] = useState('');
-  const [favorites, setFavorites] = useLocalStorage<string[]>('favorites', []);
-  const loaderRef = useRef<HTMLDivElement | null>(null);
+  const [favorites, setFavorites] = useLocalStorage<number[]>('favorites', []);
   const [mode, setMode] = useState<'all' | 'random'>('all');
 
-  // Збираємо всі картки з усіх сторінок
-  const cheatnotes = (data?.pages ?? []).flat() as CheatNote[];
+  // Збираємо всі картки
+  const cheatnotes = (data ?? []) as CheatNote[];
   cheatnotes.sort((a, b) => Number(a.id) - Number(b.id));
 
-  // IntersectionObserver для автодогрузки
-  useEffect(() => {
-    if (!hasNextPage || isLoading) return;
-    const node = loaderRef.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) {
-        fetchNextPage();
-      }
-    }, { threshold: 1 });
-    observer.observe(node);
-    return () => {
-      observer.unobserve(node);
-    };
-  }, [fetchNextPage, hasNextPage, isLoading]);
-
-  const handleToggleFavorite = (id: string) => {
+  const handleToggleFavorite = (id: number) => {
     setFavorites((favs) => (favs.includes(id) ? favs.filter((f) => f !== id) : [...favs, id]));
   };
 
   const filteredNotes = cheatnotes
     .filter(note => {
-      const isFav = favorites.includes(note.id || '');
+      const isFav = favorites.includes(note.id!);
       if (selectedCategory === 'favorite') return isFav;
       const categoryMatch = selectedCategory === 'all' || note.category === (selectedCategory || '');
       const text = [
-        note.question || note.title || '',
-        note.answer || note.description || '',
-        note.codeExample || note.code || ''
+        note.question || '',
+        note.answer || '',
+        note.codeExample || ''
       ].join(' ').toLowerCase();
       const searchMatch = search.trim() === '' || text.includes(search.trim().toLowerCase());
       return categoryMatch && searchMatch;
     })
-   .map(note => ({ ...note, isFavorite: favorites.includes(note.id || '') })); 
+   .map(note => ({ ...note, isFavorite: favorites.includes(note.id!) })); 
 
   // Перевірка дублікатів id
   const ids = cheatnotes.map(n => n.id);
@@ -108,11 +84,9 @@ function App() {
         {notesToShow.map(note => (
           <CheatCard key={note.id} note={note} onToggleFavorite={handleToggleFavorite} />
         ))}
-        {mode === 'all' && <>
-          <div ref={loaderRef} style={{ height: 32 }} />
-          {isFetchingNextPage && <p style={{ textAlign: 'center', color: '#888' }}>Завантаження...</p>}
-          {!hasNextPage && cheatnotes.length > 0 && <p style={{ textAlign: 'center', color: '#888' }}>Всі картки завантажено</p>}
-        </>}
+        {mode === 'all' && cheatnotes.length > 0 && (
+          <div style={{ height: 100, background: '#ccc' }}>🔚 Це все</div>
+        )}
       </div>
     </div>
   );

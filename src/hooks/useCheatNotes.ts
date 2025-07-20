@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import type { CheatNote } from '../types/CheatNote';
 import { mapSupabaseToCheatNote } from '../utils/mapSupabaseToCheatNote';
@@ -25,5 +25,15 @@ export const useInfiniteCheatNotes = () => {
       return allPages.length * PAGE_SIZE;
     },
     initialPageParam: 0,
+  });
+};
+
+export const useCheatNotes = () => {
+  return useQuery<CheatNote[], Error>({
+    queryKey: ['cheatnotes-all'],
+    queryFn: async () => {
+      const res = await axios.get(`${BASE_URL}${ENDPOINT}?order=id.asc`, { headers: HEADERS });
+      return (res.data as unknown[]).map(mapSupabaseToCheatNote);
+    },
   });
 };

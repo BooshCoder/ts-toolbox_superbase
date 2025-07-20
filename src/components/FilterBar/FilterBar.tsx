@@ -15,6 +15,9 @@ const allCategories: (Category | 'all' | 'favorite')[] = [
   'dom',
   'async',
   'other',
+  'variables',
+  'loops',
+  'operators',
 ];
 
 export default function FilterBar({ selected, onSelect }: Props) {

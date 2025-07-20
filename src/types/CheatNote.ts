@@ -4,13 +4,13 @@ export type Category =
   | 'objects'
   | 'dom'
   | 'async'
-  | 'other';
+  | 'other'
+  | 'variables'
+  | 'loops'
+  | 'operators';
 
 export interface CheatNote {
-  id?: string;
-  title?: string;
-  description?: string;
-  code?: string;
+  id?: number;
   question?: string;
   answer?: string;
   codeExample?: string;
