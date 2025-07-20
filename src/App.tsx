@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useCheatNotes } from './hooks/useCheatNotes';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import type { Category, CheatNote } from './types/CheatNote';
